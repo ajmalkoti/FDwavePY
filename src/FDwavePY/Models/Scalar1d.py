@@ -6,6 +6,7 @@ Created on Tue Dec 17 16:43:48 2024
 @author: ajay
 """
 import numpy as np
+import matplotlib.pyplot as plt
 from FDwavePY.Models.Model1d import Model1d
 
 class Scalar1d(Model1d):
@@ -42,8 +43,23 @@ class Scalar1d(Model1d):
     
     def random(self, **kwargs):
         pass
+
+    def user(self, **kwargs):
+        pass
     
 
-    def plot(self):
-        self.vecplot(self.xvec, self.vp, fig=None, ax=None)
+    def plot(self, **kwargs):
+        ylab= kwargs.get('ylab', 'Vp [m/s]')
+        clr = kwargs.get('color', 'r')
+        figsize = kwargs.get('figsize', (6,4))
+        
+        fig, ax = plt.subplots(1, 1, figsize=figsize)
+        self.vecplot(self.xvec, self.vp, fig=None, ax=None, label=ylab[0], color= clr[0])
         # raise NotImplementedError('Scaler model: plot function is not implemented')
+        
+        
+        
+        
+        
+        
+        

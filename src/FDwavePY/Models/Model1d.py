@@ -20,12 +20,12 @@ class Model1d(Model):
         self.xvec = np.arange(self.nodes)*dh + x0
         
         
-    def vecplot(self, xvec, yvec, fig=None, ax=None, color='b', label=''):
+    def vecplot(self, xvec, yvec, fig=None, ax=None, color='b', label='', ylab='', xlab='x [m]'):
         if fig is None or ax is None:
             fig, ax = plt.subplots(1,1)
             
         ax.plot(xvec, yvec, c=color, label=label)
-        ax.set_xlabel('x [m]')
-        ax.set_ylabel('')
+        ax.set_xlabel(xlab)
+        ax.set_ylabel(ylab)
        
 
