@@ -8,26 +8,26 @@ Created on Fri Dec 20 12:53:19 2024
 
 import numpy as np
 import matplotlib.pyplot as plt
-# from FDwavePY.Models.Point import Point
-from FDwavePY.Source.Signature import Signature
-
-
-from FDwavePY.Source.PointSource import PointSource
-from FDwavePY.Source.LineSource import LineSource
-
-
+from FDwavePY.Sources.Source import Point
+from FDwavePY.Sources.Source import MomentTensor
 
 
 
 class Sources: 
     def __init__(self, **kwargs):        
-        kind = kwargs.get('kind', 'point')
-        name = kwargs.get('name', 'Ricker')
+        skind = kwargs.get('skind', 'point')
+        if isinstance(skind, str):
+            skind = skind.lower()
+            
+        # name = kwargs.get('name', 'Ricker')
     
-        if kind in ['pt', 'point']:
-            self.src = None
+        if skind in ['p', 'point']:
+            self.src = Point()
         
-    
+        elif skind in ['mt', 'momenttensor']:
+            self.src = MomentTensor()
+        else:
+            raise ValueError('Permitted values for Stype are= [p, point, mt, momenttnsor].')
         
         
 

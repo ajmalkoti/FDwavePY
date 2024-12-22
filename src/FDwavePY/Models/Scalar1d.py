@@ -54,7 +54,7 @@ class Scalar1d(Model1d):
         figsize = kwargs.get('figsize', (6,4))
         
         fig, ax = plt.subplots(1, 1, figsize=figsize)
-        self.vecplot(self.xvec, self.vp, fig=None, ax=None, label=ylab[0], color= clr[0])
+        self.vecplot(self.xvec, self.vp, fig=fig, ax=ax, ylab=ylab, color= clr[0])
         # raise NotImplementedError('Scaler model: plot function is not implemented')
         
         
