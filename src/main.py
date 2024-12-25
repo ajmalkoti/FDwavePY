@@ -3,7 +3,7 @@ import numpy as np
 
 
 ## update the model/source/etc parts
-s = sim.FDwavePY(rheo='sc', dim=1)        # initialize the structure
+# s = sim.FDwavePY(rheo='sc', dim=1)        # initialize the structure
 # s.mod.homogeneous(vp=2000, nodes=200, dh=1)        # define the model 
 # s.mod.plot()
 
@@ -69,39 +69,90 @@ s = sim.FDwavePY(rheo='sc', dim=1)        # initialize the structure
 ##################################
 ### LAYOUT OF SOURCE AND RECEIVER
 ##################################
-s = sim.FDwavePY(rheo='sc', dim=1, skind='Point')        # initialize the structure
-s.layout.add_src_rec(5, 10)
-s.layout.plot()
+# s = sim.FDwavePY(rheo='sc', dim=1, skind='Point')        # initialize the structure
+# s.layout.add_src_rec(5, 10)
+# s.layout.plot()
 
 
-s.layout.add_src_rec([2,4,6], 10)
-s.layout.plot()
+# s.layout.add_src_rec([2,4,6], 10)
+# s.layout.plot()
 
-s.layout.add_src_rec(1, [6,8,10])
-s.layout.plot()
-
-
-s.layout.add_src_rec([2,4,6], [10,12,14])
-s.layout.plot()
+# s.layout.add_src_rec(1, [6,8,10])
+# s.layout.plot()
 
 
-s.layout.predef_s1r1(5, 10)
-s.layout.plot()      
-
-s.layout.predef_s1rn(5, [10, 15, 20, 25, 30, 35])
-s.layout.plot()
+# s.layout.add_src_rec([2,4,6], [10,12,14])
+# s.layout.plot()
 
 
-s.layout.predef_snrn_fixed([5, 10, 15, 20],   [10, 15, 20, 25, 30, 35])
-s.layout.plot()
+# s.layout.predef_s1r1(5, 10)
+# s.layout.plot()      
+
+# s.layout.predef_s1rn(5, [10, 15, 20, 25, 30, 35])
+# s.layout.plot()
 
 
-s.layout.predef_snrn_rollover([5, 10, 15, 20], [10, 12, 14, 16,18, 20], rroll=5)
-s.layout.plot()
+# s.layout.predef_snrn_fixed([5, 10, 15, 20],   [10, 15, 20, 25, 30, 35])
+# s.layout.plot()
+
+
+# s.layout.predef_snrn_rollover([5, 10, 15, 20], [10, 12, 14, 16,18, 20], rroll=5)
+# s.layout.plot()
 
 
 
 
+
+##################################
+### Simulation 
+##################################
+s = sim.FDwavePY(rheo='sc', dim=1, skind='Point')    
+s.mod.homogeneous(vp=2000, nodes=200, dh=1)        # define the model 
+# s.mod.plot()
+
+
+# s.src.ricker()
+# # s.src.plot()
+
+# s.layout.add_src_rec(5, 10)
+# s.layout.plot()
+
+
+
+# s.der.set_coeff(grid='collocated', order=2, accuracy=2)
+# print(s.der.coeff)
+
+
+# # s.bc.set_bc(left='reflect',  right='damp')
+# # s.simulate()
+
+
+# #########################
+# vp = s.mod.vp
+# dh = s.mod.dh 
+
+# sig =  s.src.svec
+# dt = s.src.dt
+# nt = s.src.nt
+
+
+# sloc = s.layout.src
+# rloc = s.layout.rec
+
+
+# s.check_stability()
+# s.check_dispersion()
+
+# bc = [s.bc.left, s.bc.right]
+
+# vpe = s.expand_domain(vp, left=2, right=5)
+
+# s.correct_src_rec_loc(sloc, left=2, right=5)
+ 
+
+# for i in range(nt):
+    
+#     s.der.calc_derivative_1d(vp)
 
 
 

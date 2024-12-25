@@ -81,8 +81,11 @@ class Source:
             raise ValueError('For t0, first initialize the tvec')
         return self._t0
         
+    @property
+    def nt(self):        
+        return self.svec.size
     
-    
+    ###########################################################
     @staticmethod 
     def sigsine(freq, dt, t0, T, scale):
         tvec = np.arange(0,T+dt, dt) - t0
@@ -185,6 +188,8 @@ class Point(Source):
         t = title if title else self.name
         ax.set_title(t)
         plt.tight_layout()
+        
+        
         
         
         

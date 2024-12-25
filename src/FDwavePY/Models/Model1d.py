@@ -11,13 +11,9 @@ from FDwavePY.Models.Model import Model
 
 
 class Model1d(Model):
-    def __init__(self, name, rheology, dim, dh=None, xvec=None):
+    def __init__(self, name, rheology, dim):
         Model.__init__(self, name, rheology=rheology, dim=dim)
      
-    
-    ###################
-    def default_xvec(self, dh, x0):
-        self.xvec = np.arange(self.nodes)*dh + x0
         
         
     def vecplot(self, xvec, yvec, fig=None, ax=None, color='b', label='', ylab='', xlab='x [m]'):

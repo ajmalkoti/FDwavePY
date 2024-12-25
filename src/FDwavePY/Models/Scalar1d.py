@@ -11,7 +11,7 @@ from FDwavePY.Models.Model1d import Model1d
 
 class Scalar1d(Model1d):
     def __init__(self, name):
-        Model1d.__init__(self, name, 'acoustic', 1)
+        Model1d.__init__(self, name, 'scalar', 1)
         self._vp = None
     
     ###################
@@ -33,9 +33,8 @@ class Scalar1d(Model1d):
     def homogeneous(self, vp, nodes, dh=1, x0=0):
         if isinstance(vp,(int, float)):
             self.vp = np.ones(nodes)*vp        
-        
-        self.nodes = nodes
-        self.default_xvec(dh, x0)
+                
+        self.xaxis.generate_xvec(nodes, dh, x0)
         
     
     def layered(self, vp, layer_thickness, dh=1):        
