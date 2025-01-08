@@ -9,6 +9,7 @@ from FDwavePY.Layout.Layout2D import Layout2D
 
 
 class Layout3D(Layout2D): 
-    def __init__(self, dim):
+    def __init__(self):
         self.slocz = None
         self.rlocz = None 
+        raise NotImplementedError('3D layout not implemented.')

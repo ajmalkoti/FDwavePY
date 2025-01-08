@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 17 16:43:48 2024
+Created on Thu Dec 26 01:27:35 2024
 
 @author: ajay
 """
+
 import numpy as np
 import matplotlib.pyplot as plt
 from FDwavePY.Models.Model import Model
-from FDwavePY.Models.MaterialProperty import MaterialProperty1D
+from FDwavePY.Models.MaterialProperty import MaterialProperty2D
 
 
-class Scalar1d(Model):
+class Scalar2d(Model):
     def __init__(self, name):
-        Model.__init__(self, name, 'scalar', 1)
-        self.vp = MaterialProperty1D()
+        Model.__init__(self, name, 'scalar', 2)
+        self.vp = MaterialProperty2D()
     
    
     #####################################################################    
@@ -40,11 +41,12 @@ class Scalar1d(Model):
 
     def plot(self, **kwargs):
         ylab= kwargs.get('ylab', 'Vp [m/s]')
-        clr = kwargs.get('color', 'r')
+        cmap = kwargs.get('cmap', 'viridis')
         figsize = kwargs.get('figsize', (6,4))
         
         fig, ax = plt.subplots(1, 1, figsize=figsize)
-        self.vp.plot(fig,ax,clr, ylab)
+        
+        self.vp.plot(fig,ax, cmap=cmap)
         plt.tight_layout()
         # raise NotImplementedError('Scaler model: plot function is not implemented')
         
@@ -54,11 +56,10 @@ class Scalar1d(Model):
         
 # if __name__ == "__main__":
     
-# m = Scalar1d('asdf')    
-# m.homogeneous(2000, 100)    
+# m = Scalar2d('asdf')    
+# m.homogeneous(2000, (50, 100))
 # m.vp.plot()
 
-# m.random(1200, 2000, 100)    
+# m.random(1200, 2000, (50, 100))    
 # m.vp.plot()
         
-# m.plot()

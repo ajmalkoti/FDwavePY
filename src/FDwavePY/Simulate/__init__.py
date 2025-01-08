@@ -20,15 +20,17 @@ from FDwavePY.Simulate.SimulateScalar2D import SimulateScalar2D
 class Simulate(SimulateScalar1D, 
                SimulateScalar2D):
     
-    def __init__(self, dim, rheo):
+    def __init__(self, **kwargs):
+        rheo = kwargs.get('rheo', None)
+        dim = kwargs.get('dim', None)
+
         if rheo in ['sc', 'scalar']:
             if dim ==1:
                 # self.sim = SimulateScalar1D()
                 SimulateScalar1D.__init__(self)
                 
             elif dim == 2:
-                pass
-                # self.sim = SimulateScalar2D()
+                SimulateScalar2D.__init__(self)
                 
             elif dim == 3:
                 self.sim = None

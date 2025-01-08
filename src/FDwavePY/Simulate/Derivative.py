@@ -17,7 +17,7 @@ class Derivative:
         self.coeff = None
               
         
-    def set_coeff(self, grid, order, accuracy):
+    def choose_derivative(self, grid, order, accuracy):
         self.grid = grid
         self.order = order
         self.accuracy = accuracy
@@ -80,15 +80,40 @@ class Derivative:
             
             
             
-    def calc_derivative_1d(self, vec):
-        a = self.accuracy//2
-        
+    def calc_derivative_1d(self, vec):        
         der = 0
-        for i in len(self.coeff):
-            der += vec[i:-a+i]
+        idx = np.arange(0, vec.size - self.accuracy)
+        for i in range(self.coeff.size):
+            der += self.coeff[i]*vec[ idx+i]
+            # print(vec[ idx+i])
+        a = self.accuracy//2        
+        
+        der = np.hstack( (der,np.zeros(a)) )  
+        der = np.hstack( (np.zeros(a), der) )  
         return der
     
     
     
-    def calc_derivative_2d(self, mat):
-        pass
+    def calc_derivative_2dx(self, mat):
+        der = 0
+        idx = np.arange(0, vec.size - self.accuracy)
+        for i in range(self.coeff.size):
+            der += self.coeff[i]*vec[ idx+i]
+            # print(vec[ idx+i])
+        a = self.accuracy//2        
+        
+        der = np.hstack( (der,np.zeros(a)) )  
+        der = np.hstack( (np.zeros(a), der) )  
+        return der
+    
+    
+    
+if __name__ == "__main__"    :
+    d= Derivative()
+    
+    # check collocated derivative
+    d.choose_derivative('collocated', 2, 2)
+    
+    x = np.arange(21)
+    y = d.calc_derivative_1d(x*x)
+    print(y)

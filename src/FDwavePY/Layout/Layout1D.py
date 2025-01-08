@@ -8,13 +8,12 @@ Created on Sun Dec 22 22:29:53 2024
 import numpy as np 
 import matplotlib.pyplot as plt
 
-# from FDwavePY.Layout.Layout1D import Layout1D
-
 from FDwavePY.Layout.PointSet1D import PointSet1D
-# from PointSet1D import PointSet1D
 
 
-class Layout1D: 
+
+
+class Layout1D:
     def __init__(self):
         self.src = []
         self.rec = []

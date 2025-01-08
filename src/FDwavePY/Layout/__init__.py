@@ -13,7 +13,10 @@ from FDwavePY.Layout.Layout3D import Layout3D
         
 
 class Layout:
-    def __init__(self, dim):
+    def __init__(self, **kwargs):
+        
+        dim = kwargs.get('dim', None)
+        
         if not isinstance(dim, int):
             raise ValueError('The dimension must be provided.')
         if dim == 1:

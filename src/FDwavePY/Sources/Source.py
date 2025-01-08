@@ -81,11 +81,8 @@ class Source:
             raise ValueError('For t0, first initialize the tvec')
         return self._t0
         
-    @property
-    def nt(self):        
-        return self.svec.size
     
-    ###########################################################
+    
     @staticmethod 
     def sigsine(freq, dt, t0, T, scale):
         tvec = np.arange(0,T+dt, dt) - t0
@@ -142,66 +139,4 @@ class Source:
     @staticmethod
     def sigormsby():
         pass
-
-    # def update_param(self, **kwargs):
-
-        
-
-class Point(Source):
-    def __init__(self):        
-        Source.__init__(self)
-        self.kind = 'Point'
-
-    def userdefined(self, svec, tvec):
-        self.svec = svec
-        self.tvec = tvec
-
-    def sine(self, freq=20, dt=0.001, T=1, t0=.025, scale=1):
-        self.name = 'Sine'
-        self.freq = freq        
-        self.scale = scale        
-        self.svec, self.tvec = self.sigsine(freq, dt, t0, T, scale)
-        
-    def triangle(self, freq=20, dt=0.001, T=1, t0=.025, scale=1):
-        self.name = 'Triangle'
-        self.freq = freq 
-        self.scale = scale
-        self.svec, self.tvec = self.sigtriangle(freq, dt, t0, T, scale)
-        
-        
-    def ricker(self, freq=20, dt=0.001, T=1, t0=.025, scale=1):
-        self.name = 'Ricker'
-        self.freq = freq        
-        self.scale = scale        
-        self.svec, self.tvec = self.sigricker(freq, dt, t0, T, scale)
-
-
-    ##########################
-    def plot(self, title=None, fig=None, ax=None, figsize=(4,2)):
-        if fig is None or ax is None:
-            fig, ax = plt.subplots(1,1,figsize=figsize)
-        
-        ax.plot(self.tvec, self.svec)
-        ax.set_xlabel('Time')
-        ax.set_ylabel('Amplitude')
-        
-        t = title if title else self.name
-        ax.set_title(t)
-        plt.tight_layout()
-        
-        
-        
-        
-        
-
-class MomentTensor(Source):
-    def __init__(self):
-        self.kind = 'MomentTensor'
-        # Source.__init__(self, name=None, 
-        #                 freq=None, dt=0.001, T=1, t0=0, scale=1)
-        
-        raise NotImplementedError('MT type source not implemented yet.')
-
-
-
 

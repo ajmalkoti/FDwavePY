@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Dec 25 22:25:15 2024
+
+@author: ajay
+"""
+import numpy as np 
+
+
+
+class MaterialPropertyAxes:
+    @property
+    def vec(self):
+        return self._vec
+    
+    @vec.setter 
+    def vec(self, val):
+        if isinstance(val, np.ndarray):
+            self._xvec = val
+            
+    ####### Dependent properties
+    @property
+    def x0(self):
+        return self.vec[0]
+    
+    @property
+    def x1(self):
+        return self.vec[-1]
+
+    @property
+    def dh(self):
+        return self.vec[1]-self.vec[0]
+    
+    
+    @property
+    def nnodes(self):
+        return self.vec.shape
+    
+    
+    ###### Methods 
+    def ax_generate(self, nodes, dh, x0):
+        self.vec = np.arange(nodes)*dh + x0
+    
+    
+    def ax_expand(self, begin=0, end=0):
+        if begin>0:
+            temp = self.x0 -np.arange(1,begin+1)*self.dh 
+            self.vec = np.hstack((temp, self.vec))
+        if end>0:
+            temp = self.x1 + np.arange(1,begin+1)*self.dh 
+            self.vec = np.hstack((self.vec, temp))
