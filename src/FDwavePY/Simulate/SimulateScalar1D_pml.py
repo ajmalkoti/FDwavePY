@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec 25 12:34:26 2024
+Created on Wed Jan  8 17:01:31 2025
 
 @author: ajay
 """
 
-from FDwavePY.Simulate.Derivative import Derivative
-from FDwavePY.Simulate.BC import BC
-import numpy as np
-import matplotlib.pyplot as plt
-
-class SimulateScalar1D:
+class SimulateScalar1D_pml:
     def __init__(self):
         self.der = Derivative()
         self.bc = BC()
@@ -31,9 +26,11 @@ class SimulateScalar1D:
             print(f'Courant condition satisfied, ({cfl} < Threshold {cflthreshold})')
         else:            
             raise ValueError(f'Courant condition is not satisfied, ({cfl} > Threshold {cflthreshold}).')
-
-
-
+        
+            
+            
+            
+    
     def check_dispersion(self, mod, src, fmax, MinPointsPerWavelength):
         print('Check dispersion conditions.')
         
@@ -45,10 +42,10 @@ class SimulateScalar1D:
             print(f'Dispersion condition satisfied, ({npts} > Threshold {MinPointsPerWavelength})')
         else: 
             raise ValueError(f'Dispersion condition not satisfied, ({npts} < Threshold {MinPointsPerWavelength})')
-
-
-
-
+            
+    
+    
+    
     def simulate_ishot(self,  ishot, mod, src, layout, **kwargs):
         vp = mod.vp
         dh = mod.vp.ax1.dh 
@@ -69,8 +66,10 @@ class SimulateScalar1D:
         order = kwargs.get('order', 2)
         accuracy = kwargs.get('accuracy', 2)        
         self.der.choose_derivative( grid, order, accuracy)
-
+        
+        
         ## Expand domain
+        
         # Allocate new matrices
         p0 = np.zeros_like(mod.vp.mp)
         p1 = np.zeros_like(mod.vp.mp)

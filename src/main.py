@@ -19,8 +19,8 @@ import matplotlib.pyplot as plt
 #                             rloc=s.mod.vp.ax1.vec)
 # s.layout.plot()
 # ########
-# ss = s.simulate_ishot(0)
-# plt.imshow(ss)
+# s.simulate_ishot(0)
+# s.sim.plot_receiver_response()
 
 
 
@@ -33,26 +33,33 @@ s.mod.vp.ax1.get_index([8,10,12])
 
 
 ########
-s.src.ricker(freq=20, dt=0.001, T=1, t0=.05, scale=1)
+s.src.ricker(freq=20, dt=0.0005, T=1, t0=.05, scale=1)
 s.src.plot(xlim = [0,.2])
 
 
 ########
 rx = s.mod.vp.ax1.vec
-rz = np.ones_like(rx)
+rz = 2*np.ones_like(rx)
 
-N = rx.size
-sx = [rx[N//2]]
-sz = np.ones_like(sx)
-
+sx = [s.mod.vp.ax1.vec[150]]
+sz = [s.mod.vp.ax2.vec[100]]
 
 s.layout.predef_snrn_fixed(slocx=sx, slocz=sz,  rlocx=rx, rlocz=rz)
-s.layout.plot()
-# ########
-ss = s.simulate_ishot(0)
-# # plt.imshow(ss)
+# s.layout.plot()
 
-## TODO fix 2d simulation for 2D derivative.
+# s.layout.src[0].locx
+# s.layout.src[0].locz
+
+
+#%%
+# ########
+s.verbose = True
+s.simulate_ishot(0)
+s.sim.plot_receiver_response(figsize=(5,8))
+# plt.imshow(s.sim.ss)
+# plt.plot(ss[:,150])
+
+
 
 
 

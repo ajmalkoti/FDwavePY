@@ -8,6 +8,19 @@ Created on Wed Dec 25 12:47:53 2024
 import numpy as np
 
 
+def CollocatedD1_O2(arr):
+    pass
+
+def CollocatedD2_O2(arr):
+    coeff = np.array([1, -2, 1])
+    
+    der = np.zeros_like(arr)
+    der[1:-1] = coeff[0]*arr[0:-2]  + \
+                coeff[1]*arr[1:-1] + \
+                coeff[0]*arr[2:]
+    return der
+
+
 class Derivative:
     def __init__(self, grid=None, order=None, accuracy=None):
         self.grid = grid
@@ -81,31 +94,24 @@ class Derivative:
             
             
     def calc_derivative_1d(self, vec):        
-        der = 0
+        der = np.zeros_like(vec)
         idx = np.arange(0, vec.size - self.accuracy)
-        for i in range(self.coeff.size):
-            der += self.coeff[i]*vec[ idx+i]
-            # print(vec[ idx+i])
         a = self.accuracy//2        
-        
-        der = np.hstack( (der,np.zeros(a)) )  
-        der = np.hstack( (np.zeros(a), der) )  
+        for i in range(self.coeff.size):
+            der[a:-a] += self.coeff[i]*vec[ idx+i]
         return der
     
+       
     
-    
-    def calc_derivative_2dx(self, mat):
-        der = 0
-        idx = np.arange(0, vec.size - self.accuracy)
-        for i in range(self.coeff.size):
-            der += self.coeff[i]*vec[ idx+i]
-            # print(vec[ idx+i])
-        a = self.accuracy//2        
+    def calc_derivative(self, arr, axis='x'):
+        D = {'x':1, 'z':0}
+        if arr.ndim ==1:
+            der = self.calc_derivative_1d(arr)
+        elif arr.ndim ==2:
+            der = np.apply_along_axis(self.calc_derivative_1d, D[axis], arr)
         
-        der = np.hstack( (der,np.zeros(a)) )  
-        der = np.hstack( (np.zeros(a), der) )  
-        return der
-    
+        return  der
+            
     
     
 if __name__ == "__main__"    :
@@ -114,6 +120,13 @@ if __name__ == "__main__"    :
     # check collocated derivative
     d.choose_derivative('collocated', 2, 2)
     
-    x = np.arange(21)
-    y = d.calc_derivative_1d(x*x)
-    print(y)
+    # x = np.arange(21)
+    # y = d.calc_derivative_1d(x*x)
+    # print(y)
+    
+    
+    x = np.arange(10)
+    y = np.tile(x*x, (10,1))
+    yd = d.calc_derivative_1d(y[1,:])
+    ydx = d.calc_derivative(y, axis='x')
+    ydz = d.calc_derivative(y, axis='z')

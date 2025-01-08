@@ -83,7 +83,7 @@ class Layout2D():
         rlocz = np.array(rlocz)
         
         for i in range(len(slocx)):
-            self.predef_s1rn(slocx[i], slocx[i],  rlocx, rlocz)
+            self.predef_s1rn(slocx[i], slocz[i],  rlocx, rlocz)
             
     
     

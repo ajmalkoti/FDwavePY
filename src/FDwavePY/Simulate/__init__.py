@@ -17,8 +17,7 @@ from FDwavePY.Simulate.SimulateScalar1D import SimulateScalar1D
 from FDwavePY.Simulate.SimulateScalar2D import SimulateScalar2D
 
 
-class Simulate(SimulateScalar1D, 
-               SimulateScalar2D):
+class Simulate:
     
     def __init__(self, **kwargs):
         rheo = kwargs.get('rheo', None)
@@ -27,10 +26,10 @@ class Simulate(SimulateScalar1D,
         if rheo in ['sc', 'scalar']:
             if dim ==1:
                 # self.sim = SimulateScalar1D()
-                SimulateScalar1D.__init__(self)
+                self.sim = SimulateScalar1D()
                 
             elif dim == 2:
-                SimulateScalar2D.__init__(self)
+                self.sim = SimulateScalar2D()
                 
             elif dim == 3:
                 self.sim = None

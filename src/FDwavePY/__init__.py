@@ -14,11 +14,17 @@ from FDwavePY.Simulate import Simulate
 
 
 class FDwavePY(Simulate):
-# class FDwavePY():    
     
     def __init__(self,**kwargs):
+        self.verbose = True
         Models.__init__(self,**kwargs)
         Sources.__init__(self,**kwargs)                
         
         Layout.__init__(self, **kwargs)        
         Simulate.__init__(self, **kwargs)
+        
+        
+    def simulate_ishot(self, shotno):
+        return self.sim.simulate_ishot(shotno, self.mod, self.src, self.layout, \
+                                       verbose=self.verbose)
+        
