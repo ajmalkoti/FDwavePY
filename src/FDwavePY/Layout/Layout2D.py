@@ -25,9 +25,12 @@ class Layout2D():
         self.rec.append(PointSet2D(rlocx, rlocz))
         
     
-    def plot(self, fig=None, ax=None, yscale=1):
+    def plot(self, fig=None, ax=None, yscale=1, figsize=None):
         if ax is None or fig is None:
-            fig, ax = plt.subplots(1,1)        
+            if figsize is None:
+                fig, ax = plt.subplots(1,1)
+            else: 
+                fig, ax = plt.subplots(1,1, figsize=figsize)      
         
         ax.set_yticklabels('')
         ax.set_xlabel('x [m]')

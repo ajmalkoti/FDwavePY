@@ -22,9 +22,13 @@ class Layout1D:
         self.src.append(PointSet1D(sloc))
         self.rec.append(PointSet1D(rloc))
    
-    def plot(self, fig=None, ax=None, yscale=1):
+    def plot(self, fig=None, ax=None, yscale=1, figsize=None):
         if ax is None or fig is None:
-            fig, ax = plt.subplots(1,1)        
+            if figsize is None:
+                fig, ax = plt.subplots(1,1)
+            else: 
+                fig, ax = plt.subplots(1,1, figsize=figsize)
+
         
         ax.set_yticklabels('')
         ax.set_xlabel('x [m]')
