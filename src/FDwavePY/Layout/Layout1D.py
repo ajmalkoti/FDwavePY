@@ -11,8 +11,6 @@ import matplotlib.pyplot as plt
 from FDwavePY.Layout.PointSet1D import PointSet1D
 
 
-
-
 class Layout1D:
     def __init__(self):
         self.src = []
