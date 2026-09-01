@@ -12,6 +12,10 @@ from FDwavePY.Models.MaterialProperty import MaterialProperty1D
 
 
 class Scalar1d(Model):
+    """
+    This module provides the Scalar medium  with vp only
+    
+    """
     def __init__(self, name):
         Model.__init__(self, name, 'scalar', 1)
         self.vp = MaterialProperty1D()
@@ -52,13 +56,12 @@ class Scalar1d(Model):
         
         
         
-# if __name__ == "__main__":
+if __name__ == "__main__":    
+    m = Scalar1d('asdf')    
+    m.homogeneous(2000, 100)    
+    m.vp.plot()
     
-# m = Scalar1d('asdf')    
-# m.homogeneous(2000, 100)    
-# m.vp.plot()
-
-# m.random(1200, 2000, 100)    
-# m.vp.plot()
-        
-# m.plot()
+    m.random(1200, 2000, 100)    
+    m.vp.plot()
+            
+    m.plot()  

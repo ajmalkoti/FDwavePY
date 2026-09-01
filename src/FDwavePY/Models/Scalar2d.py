@@ -54,12 +54,11 @@ class Scalar2d(Model):
         
         
         
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    m = Scalar2d('asdf')    
+    m.homogeneous(2000, (50, 100))
+    m.vp.plot()
     
-# m = Scalar2d('asdf')    
-# m.homogeneous(2000, (50, 100))
-# m.vp.plot()
-
-# m.random(1200, 2000, (50, 100))    
-# m.vp.plot()
+    m.random(1200, 2000, (50, 100))    
+    m.vp.plot()
         
